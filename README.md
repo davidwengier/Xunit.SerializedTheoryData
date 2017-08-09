@@ -5,6 +5,7 @@ This project provides a simple replacement for TheoryData that automatically ser
 
 Currently only classes, and lists are supported.
 
+[![Build status](https://ci.appveyor.com/api/projects/status/fh1ph89c7kx9pddg?svg=true)](https://ci.appveyor.com/project/StarRez/xunit-serializedtheorydata)
 [![NuGet package](https://img.shields.io/nuget/v/xunit.serializedtheorydata.svg)](https://nuget.org/packages/xunit.serializedtheorydata)
 
 ## Installation
