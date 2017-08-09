@@ -48,6 +48,7 @@ public static TheoryData<Digit> GetTestCases()
 ```
 
 Visual Studio will display the test like this:
+
 ![Before](doc/before.png)
 
 All of the test cases ran, but only one is shown in the Test Explorer. By simply changing `TheoryData` to `SerializedTheoryData` our code and Visual Studio now look like this:
