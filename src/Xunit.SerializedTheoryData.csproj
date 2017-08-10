@@ -7,7 +7,7 @@
     <Company />
     <Description>A simple replacement for TheoryData that automatically serializes and deserializes in order to show more fidelity in test cases.</Description>
     <PackageProjectUrl>https://github.com/davidwengier/Xunit.SerializedTheoryData</PackageProjectUrl>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Copyright>Copyright © David Wengier</Copyright>
     <PackageTags>xunit testing theorydata seriazlied</PackageTags>
     <SignAssembly>True</SignAssembly>

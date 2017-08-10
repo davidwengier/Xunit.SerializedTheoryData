@@ -4,38 +4,38 @@ using Xunit.Abstractions;
 
 namespace Xunit
 {
-	internal abstract class SerializedWrapper
+	public class SerializedWrapper<T> : IXunitSerializable
 	{
-		public abstract object WrappedValue { get; }
-	}
+		private const string ObjectField = "Object";
+		private T m_object;
 
-	internal class SerializedWrapper<T> : SerializedWrapper, IXunitSerializable
-	{
-		private const string ValueField = "Value";
-		private T m_value;
-
-		public override object WrappedValue
+		public T Object
 		{
-			get { return m_value; }
+			get { return m_object; }
 		}
 
 		public SerializedWrapper()
 		{
 		}
 
-		public SerializedWrapper(T value)
+		public SerializedWrapper(T obj)
 		{
-			this.m_value = value;
+			this.m_object = obj;
 		}
 
 		public void Deserialize(IXunitSerializationInfo info)
 		{
-			m_value = JsonConvert.DeserializeObject<T>(info.GetValue<string>(ValueField));
+			m_object = JsonConvert.DeserializeObject<T>(info.GetValue<string>(ObjectField));
 		}
 
 		public void Serialize(IXunitSerializationInfo info)
 		{
-			info.AddValue(ValueField, JsonConvert.SerializeObject(m_value), typeof(string));
+			info.AddValue(ObjectField, JsonConvert.SerializeObject(m_object), typeof(string));
+		}
+
+		public override string ToString()
+		{
+			return m_object.ToString();
 		}
 	}
 }

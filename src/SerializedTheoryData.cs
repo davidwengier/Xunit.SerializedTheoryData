@@ -28,12 +28,13 @@ namespace Xunit
 		{
 			for (int i = 0; i < values.Length; i++)
 			{
-				if (IsSerializable(values)) continue;
-
 				object value = values[i];
+
+				if (IsXUnitSerializable(value)) continue;
+
 				Type valueType = value.GetType();
 				Type wrapperType;
-				if (valueType.GetTypeInfo().IsGenericType && (valueType.GetGenericTypeDefinition() == typeof(List<>)))
+				if (valueType.IsGenericType && (valueType.GetGenericTypeDefinition() == typeof(List<>)))
 				{
 					wrapperType = typeof(SerializedList<>).MakeGenericType(valueType.GenericTypeArguments[0]);
 				}
@@ -45,21 +46,46 @@ namespace Xunit
 			}
 		}
 
-		private bool IsSerializable(object arg)
+		private bool IsXUnitSerializable(object arg)
 		{
-			// the CanSerializeObject method from xunit is internal, and the class its on is private, so sadly.....
-			//Type t = typeof(Xunit.Sdk.XunitTest).GetTypeInfo().Assembly.GetType("Xunit.Serialization.XunitSerializationInfo", true, true);
-			//MethodInfo method = t.GetRuntimeMethod("CanSerializeObject", Type.EmptyTypes);
-			return arg is IXunitSerializable;
+			// This list comes from the CanSerializeObject method from xunit. Since Xunit supports these out of the box, we don't need to wrap
+			return arg is string ||
+				arg is char ||
+				arg is char? ||
+				arg is string ||
+				arg is byte ||
+				arg is byte? ||
+				arg is short ||
+				arg is short? ||
+				arg is ushort ||
+				arg is ushort? ||
+				arg is int ||
+				arg is int? ||
+				arg is uint ||
+				arg is uint? ||
+				arg is long ||
+				arg is long? ||
+				arg is ulong ||
+				arg is ulong? ||
+				arg is float ||
+				arg is float? ||
+				arg is double ||
+				arg is double? ||
+				arg is decimal ||
+				arg is decimal? ||
+				arg is bool ||
+				arg is bool? ||
+				arg is DateTime ||
+				arg is DateTime? ||
+				arg is DateTimeOffset ||
+				arg is DateTimeOffset? ||
+				arg is IXunitSerializable;
 		}
 
 		/// <inheritdoc/>
 		public IEnumerator<object[]> GetEnumerator()
 		{
-			foreach (object[] item in data)
-			{
-				yield return item.Select(i => (i as SerializedWrapper)?.WrappedValue ?? i).ToArray();
-			}
+			return data.GetEnumerator();
 		}
 
 		/// <inheritdoc/>
