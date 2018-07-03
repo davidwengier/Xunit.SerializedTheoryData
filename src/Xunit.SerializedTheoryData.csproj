@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>David Wengier</Authors>
     <Company />
@@ -9,7 +9,7 @@
     <PackageProjectUrl>https://github.com/davidwengier/Xunit.SerializedTheoryData</PackageProjectUrl>
     <Version>1.0.1</Version>
     <Copyright>Copyright © David Wengier</Copyright>
-    <PackageTags>xunit testing theorydata seriazlied</PackageTags>
+    <PackageTags>xunit testing theorydata serialized</PackageTags>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>opensourcekey.snk</AssemblyOriginatorKeyFile>
     <RootNamespace>Xunit</RootNamespace>
